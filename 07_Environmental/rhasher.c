@@ -1,9 +1,12 @@
 #define _GNU_SOURCE
+
 #include <ctype.h>
 #include <rhash.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "config.h"
 
 #ifdef READLINE_OVERRIDE
 #include <readline/readline.h>
@@ -16,13 +19,11 @@ int read_line(char **line_ptr);
 void print_hash_from_str(const char *str, int is_file_input, int rhash_id, int rhpr);
 
 int main(int argc, char **argv) {
-    rhash context;
     char *line = NULL;
-    ssize_t chars_read;
 
     rhash_library_init();
 
-    while ((chars_read = read_line(&line)) != -1) {
+    while (read_line(&line) != -1) {
         char *hash_type = strtok(line, STRTOK_DELIM);
         char *str = strtok(NULL, STRTOK_DELIM);
         if (hash_type == NULL || str == NULL) {
