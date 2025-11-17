@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: guess 0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-17 20:41+0000\n"
+"Report-Msgid-Bugs-To: vasily.mozgovykh@yandex.ru\n"
+"POT-Creation-Date: 2025-11-17 20:46+0000\n"
 "PO-Revision-Date: 2025-11-17 20:42+0000\n"
 "Last-Translator:  <vasily.mozgovykh@yandex.ru>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -21,24 +21,24 @@ msgstr ""
 #: src/guess.c:19
 #, c-format
 msgid "Guess a number from 1 to 100.\n"
-msgstr ""
+msgstr "Загадайте число от 1 до 100.\n"
 
 #: src/guess.c:24
 #, c-format
 msgid "Is your number greater than %d? (Yes/No): "
-msgstr ""
+msgstr "Ваше число больше, чем %d? (Yes/No): "
 
 #: src/guess.c:27
 #, c-format
 msgid "Input/Output error. Terminating...\n"
-msgstr ""
+msgstr "Ошибка ввода/вывода. Завершение программы...\n"
 
 #: src/guess.c:36
 #, c-format
 msgid "Please answer 'Yes' or 'No'\n"
-msgstr ""
+msgstr "Пожалуйста, отвечайте 'Yes' или 'No'\n"
 
 #: src/guess.c:40
 #, c-format
 msgid "Your guessed number is %d!\n"
-msgstr ""
+msgstr "Вы загадали число %d!\n"
