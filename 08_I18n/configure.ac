@@ -1,3 +1,4 @@
+AC_PREREQ([2.69])
 AC_INIT([guess], [0.0], [vasily.mozgovykh@yandex.ru])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
@@ -11,7 +12,7 @@ ALL_LINGUAS="ru"
 
 AC_PROG_CC
 
-AC_CHECK_HEADERS([libintl.h locale.h stdlib.h stdio.h string.h])
+AC_CHECK_HEADERS([libintl.h libgen.h locale.h stdlib.h stdio.h string.h])
 
 AC_CHECK_FUNCS([realpath setlocale])
 
