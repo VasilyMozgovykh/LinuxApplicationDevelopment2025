@@ -63,12 +63,13 @@ void print_labirinth(char *labirinth) {
 }
 
 int find_random_not_visited_room(char *visited, int not_visited_cnt) {
+    int size = 6;
     if (not_visited_cnt < 1) {
         return -1;
     }
     int room;
     int id = 1 + rand() % not_visited_cnt;
-    for (room = 0; id > 0; room++) {
+    for (room = 0; id > 0 && room < size * size; room++) {
         if (visited[room] == 0) {
             id--;
         }
@@ -92,17 +93,19 @@ int visit_random_room(char *labirinth, char *visited, int start_room, int force,
     }
 
     /* Choose any available direction or return -1 */
-    for (int id = 0; id < 4; i++) {
+    for (int id = 0; id < 4; id++) {
         switch (directions[id]) {
             case 0:
                 /* North */
                 if (i > 0 && (force || !visited[start_room - size])) {
                     if (!visited[start_room - size]) {
                         (*not_visited_cnt)--; 
+                        visited[start_room - size] = 1;
                     }
-                    (*walls_num)--;
-                    labirinth[(2 * i) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
-                    visited[start_room - size] = 1;
+                    if (labirinth[(2 * i) * str_size + (2 * j + 1)] == WALL_CHAR) {
+                        (*walls_num)--;
+                        labirinth[(2 * i) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
+                    }
                     return start_room - size;
                 }
                 break;
@@ -111,10 +114,12 @@ int visit_random_room(char *labirinth, char *visited, int start_room, int force,
                 if (j < size - 1 && (force || !visited[start_room + 1])) {
                     if (!visited[start_room + 1]) {
                         (*not_visited_cnt)--;
+                        visited[start_room + 1] = 1;
                     }
-                    (*walls_num)--;
-                    labirinth[(2 * i + 1) * str_size + (2 * j + 2)] = PASSAGE_CHAR;
-                    visited[start_room + 1] = 1;
+                    if (labirinth[(2 * i + 1) * str_size + (2 * j + 2)] == WALL_CHAR) {
+                        (*walls_num)--;
+                        labirinth[(2 * i + 1) * str_size + (2 * j + 2)] = PASSAGE_CHAR;
+                    }
                     return start_room + 1;
                 }
                 break;
@@ -123,10 +128,12 @@ int visit_random_room(char *labirinth, char *visited, int start_room, int force,
                 if (i < size - 1) {
                     if (!visited[start_room + size]) {
                         (*not_visited_cnt)--;
+                        visited[start_room + size] = 1;
                     }
-                    (*walls_num)--;
-                    labirinth[(2 * i + 2) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
-                    visited[start_room + size] = 1;
+                    if (labirinth[(2 * i + 2) * str_size + (2 * j + 1)] == WALL_CHAR) {
+                        (*walls_num)--;
+                        labirinth[(2 * i + 2) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
+                    }
                     return start_room + size;
                 }
                 break;
@@ -135,10 +142,12 @@ int visit_random_room(char *labirinth, char *visited, int start_room, int force,
                 if (j > 0) {
                     if (!visited[start_room - 1]) {
                         (*not_visited_cnt)--;
+                        visited[start_room - 1] = 1;
                     }
-                    (*walls_num)--;
-                    labirinth[(2 * i + 1) * str_size + (2 * j)] = PASSAGE_CHAR;
-                    visited[start_room - 1] = 1;
+                    if (labirinth[(2 * i + 1) * str_size + (2 * j)] == WALL_CHAR) {
+                        (*walls_num)--;
+                        labirinth[(2 * i + 1) * str_size + (2 * j)] = PASSAGE_CHAR;
+                    }
                     return start_room - 1;
                 }
                 break;
@@ -153,13 +162,10 @@ int break_walls(char *labirinth, char *visited) {
     int size = 6;
     int walls_remaining = 2 * (size - 1) * size;
     int not_visited_cnt = size * size;
-
     while (not_visited_cnt > 0) {
-        printf("not_visited_cnt=%d, walls_remaining=%d\n", not_visited_cnt, walls_remaining);
         int start_room = find_random_not_visited_room(visited, not_visited_cnt);
         int next_room = visit_random_room(labirinth, visited, start_room, 1, &walls_remaining, &not_visited_cnt);
         while (next_room != -1) {
-            printf("start_room=%d, next_room=%d\n", start_room, next_room);
             start_room = next_room;
             next_room = visit_random_room(labirinth, visited, start_room, 0, &walls_remaining, &not_visited_cnt);
         }
