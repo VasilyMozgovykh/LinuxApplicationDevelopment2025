@@ -4,6 +4,14 @@ GENERATES = lab lab1* lab2* lab3*
 
 All: lab lab1 lab2 lab3
 
+run: lab lab1 lab2 lab3
+	./lab;
+	./lab1 8;
+	./lab2 ' @' 5;
+	./lab3 12 '.#' 4;
+	./lab3 11 '.#' 4;
+	./lab3 12 '.#' 4;
+
 lab%: lab%.c
 	$(CC) $(CFLAGS) $< -o $@
 
