@@ -1,0 +1,142 @@
+--- lab.c	2025-11-24 19:41:57.740413978 +0000
++++ lab1.c	2025-11-24 19:41:49.644314987 +0000
+@@ -10,29 +10,38 @@
+ #define WALL_CHAR ('#')
+ #define PASSAGE_CHAR ('.')
+ 
+-void spawn_initial_labirinth(char **labirinth, int is_new);
++void spawn_initial_labirinth(char **labirinth, int is_new, int size);
+ 
+-void fill_initial_labirinth(char *labirinth);
++void fill_initial_labirinth(char *labirinth, int size);
+ 
+-char *get_labirinth(void);
++char *get_labirinth(int size);
+ 
+-void print_labirinth(char *labirinth);
++void print_labirinth(char *labirinth, int size);
+ 
+-int main(void) {
++int main(int argc, char **argv) {
++    if (argc < 2) {
++        fprintf(stderr, "Usage: %s size\n", argv[0]);
++        return 1;
++    }
++    int size = atoi(argv[1]);
++    if (size < 2) {
++        fprintf(stderr, "Labirinth size should be greater than 1\n");
++        return 1;
++    }
+     srand(time(NULL));
+ 
+-    char *labirinth = get_labirinth();
++    char *labirinth = get_labirinth(size);
+     if (labirinth == NULL) {
+         fprintf(stderr, "Can't allocate memory for labirinth\n");
+         return 1;
+     }
+-    print_labirinth(labirinth);
++    print_labirinth(labirinth, size);
+     free(labirinth);
+     return 0;
+ }
+ 
+-void fill_initial_labirinth(char *labirinth) {
+-    int str_size = 13;
++void fill_initial_labirinth(char *labirinth, int size) {
++    int str_size = 2 * size + 1;
+     memset(labirinth, WALL_CHAR, str_size * str_size * sizeof(*labirinth));
+     for (int i = 1; i < str_size; i += 2) {
+         for (int j = 1; j < str_size; j += 2) {
+@@ -41,19 +50,19 @@
+     }
+ }
+ 
+-void spawn_initial_labirinth(char **labirinth, int is_new) {
+-    int str_size = 13;
++void spawn_initial_labirinth(char **labirinth, int is_new, int size) {
++    int str_size = 2 * size + 1;
+     if (is_new) {
+         *labirinth = (char *) malloc(str_size * str_size * sizeof(*labirinth));
+         if (*labirinth == NULL) {
+             return;
+         }
+     }
+-    fill_initial_labirinth(*labirinth);
++    fill_initial_labirinth(*labirinth, size);
+ }
+ 
+-void print_labirinth(char *labirinth) {
+-    int str_size = 13;
++void print_labirinth(char *labirinth, int size) {
++    int str_size = 2 * size + 1;
+     for (int i = 0; i < str_size; i++) {
+         for (int j = 0; j < str_size; j++) {
+             putchar(labirinth[i * str_size + j]);
+@@ -62,8 +71,7 @@
+     }
+ }
+ 
+-int find_random_not_visited_room(char *visited, int not_visited_cnt) {
+-    int size = 6;
++int find_random_not_visited_room(char *visited, int not_visited_cnt, int size) {
+     if (not_visited_cnt < 1) {
+         return -1;
+     }
+@@ -77,8 +85,7 @@
+     return room - 1;
+ }
+ 
+-int visit_random_room(char *labirinth, char *visited, int start_room, int force, int *walls_num, int *not_visited_cnt) {
+-    int size = 6;
++int visit_random_room(char *labirinth, char *visited, int start_room, int force, int *walls_num, int *not_visited_cnt, int size) {
+     int str_size = 2 * size + 1;
+     int i = start_room / size, j = start_room % size;
+ 
+@@ -158,26 +165,23 @@
+     return -1;
+ }
+ 
+-int break_walls(char *labirinth, char *visited) {
+-    int size = 6;
++int break_walls(char *labirinth, char *visited, int size) {
+     int walls_remaining = 2 * (size - 1) * size;
+     int not_visited_cnt = size * size;
+     while (not_visited_cnt > 0) {
+-        int start_room = find_random_not_visited_room(visited, not_visited_cnt);
+-        int next_room = visit_random_room(labirinth, visited, start_room, 1, &walls_remaining, &not_visited_cnt);
++        int start_room = find_random_not_visited_room(visited, not_visited_cnt, size);
++        int next_room = visit_random_room(labirinth, visited, start_room, 1, &walls_remaining, &not_visited_cnt, size);
+         while (next_room != -1) {
+             start_room = next_room;
+-            next_room = visit_random_room(labirinth, visited, start_room, 0, &walls_remaining, &not_visited_cnt);
++            next_room = visit_random_room(labirinth, visited, start_room, 0, &walls_remaining, &not_visited_cnt, size);
+         }
+     }
+     return walls_remaining;
+ }
+ 
+-char *get_labirinth(void) {
+-    int size = 6;
+-
++char *get_labirinth(int size) {
+     char *labirinth, *visited;
+-    spawn_initial_labirinth(&labirinth, 1);
++    spawn_initial_labirinth(&labirinth, 1, size);
+     if (labirinth == NULL) {
+         return NULL;
+     }
+@@ -190,10 +194,11 @@
+     memset(visited, 0, size * size * sizeof(*visited));
+ 
+     int walls_total = 2 * size * (size - 1);
+-    int walls_remaining = break_walls(labirinth, visited);
++    int walls_remaining = break_walls(labirinth, visited, size);
+     for (int retry = 0; walls_remaining < 0.15 * walls_total && retry < MAX_INIT_RETRIES; retry++) {
+         memset(visited, 0, size * size * sizeof(*visited));
+-        walls_remaining = break_walls(labirinth, visited);
++        spawn_initial_labirinth(&labirinth, 0, size);
++        walls_remaining = break_walls(labirinth, visited, size);
+     }
+     free(visited);
+     return labirinth;

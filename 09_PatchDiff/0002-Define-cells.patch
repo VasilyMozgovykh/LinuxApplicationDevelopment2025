@@ -1,0 +1,97 @@
+--- lab1.c	2025-11-24 19:48:29.133194961 +0000
++++ lab2.c	2025-11-24 19:48:10.368965902 +0000
+@@ -7,8 +7,8 @@
+ #define MAX_INIT_RETRIES 100
+ #define NUM_RANDOM_PERMUTATIONS 6
+ 
+-#define WALL_CHAR ('#')
+-#define PASSAGE_CHAR ('.')
++static char passage_char = '.';
++static char wall_char = '.';
+ 
+ void spawn_initial_labirinth(char **labirinth, int is_new, int size);
+ 
+@@ -19,11 +19,19 @@
+ void print_labirinth(char *labirinth, int size);
+ 
+ int main(int argc, char **argv) {
+-    if (argc < 2) {
+-        fprintf(stderr, "Usage: %s size\n", argv[0]);
++    if (argc < 3) {
++        fprintf(stderr, "Usage: %s chars size\n", argv[0]);
+         return 1;
+     }
+-    int size = atoi(argv[1]);
++
++    if (strlen(argv[1]) < 2) {
++        fprintf(stderr, "You should specify at least 2 chars for passages and walls\n");
++        return 1;
++    }
++    passage_char = argv[1][0];
++    wall_char = argv[1][1];
++
++    int size = atoi(argv[2]);
+     if (size < 2) {
+         fprintf(stderr, "Labirinth size should be greater than 1\n");
+         return 1;
+@@ -42,10 +50,10 @@
+ 
+ void fill_initial_labirinth(char *labirinth, int size) {
+     int str_size = 2 * size + 1;
+-    memset(labirinth, WALL_CHAR, str_size * str_size * sizeof(*labirinth));
++    memset(labirinth, wall_char, str_size * str_size * sizeof(*labirinth));
+     for (int i = 1; i < str_size; i += 2) {
+         for (int j = 1; j < str_size; j += 2) {
+-            labirinth[i * str_size + j] = PASSAGE_CHAR;
++            labirinth[i * str_size + j] = passage_char;
+         }
+     }
+ }
+@@ -109,9 +117,9 @@
+                         (*not_visited_cnt)--; 
+                         visited[start_room - size] = 1;
+                     }
+-                    if (labirinth[(2 * i) * str_size + (2 * j + 1)] == WALL_CHAR) {
++                    if (labirinth[(2 * i) * str_size + (2 * j + 1)] == wall_char) {
+                         (*walls_num)--;
+-                        labirinth[(2 * i) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
++                        labirinth[(2 * i) * str_size + (2 * j + 1)] = passage_char;
+                     }
+                     return start_room - size;
+                 }
+@@ -123,9 +131,9 @@
+                         (*not_visited_cnt)--;
+                         visited[start_room + 1] = 1;
+                     }
+-                    if (labirinth[(2 * i + 1) * str_size + (2 * j + 2)] == WALL_CHAR) {
++                    if (labirinth[(2 * i + 1) * str_size + (2 * j + 2)] == wall_char) {
+                         (*walls_num)--;
+-                        labirinth[(2 * i + 1) * str_size + (2 * j + 2)] = PASSAGE_CHAR;
++                        labirinth[(2 * i + 1) * str_size + (2 * j + 2)] = passage_char;
+                     }
+                     return start_room + 1;
+                 }
+@@ -137,9 +145,9 @@
+                         (*not_visited_cnt)--;
+                         visited[start_room + size] = 1;
+                     }
+-                    if (labirinth[(2 * i + 2) * str_size + (2 * j + 1)] == WALL_CHAR) {
++                    if (labirinth[(2 * i + 2) * str_size + (2 * j + 1)] == wall_char) {
+                         (*walls_num)--;
+-                        labirinth[(2 * i + 2) * str_size + (2 * j + 1)] = PASSAGE_CHAR;
++                        labirinth[(2 * i + 2) * str_size + (2 * j + 1)] = passage_char;
+                     }
+                     return start_room + size;
+                 }
+@@ -151,9 +159,9 @@
+                         (*not_visited_cnt)--;
+                         visited[start_room - 1] = 1;
+                     }
+-                    if (labirinth[(2 * i + 1) * str_size + (2 * j)] == WALL_CHAR) {
++                    if (labirinth[(2 * i + 1) * str_size + (2 * j)] == wall_char) {
+                         (*walls_num)--;
+-                        labirinth[(2 * i + 1) * str_size + (2 * j)] = PASSAGE_CHAR;
++                        labirinth[(2 * i + 1) * str_size + (2 * j)] = passage_char;
+                     }
+                     return start_room - 1;
+                 }

@@ -1,0 +1,47 @@
+--- lab2.c	2025-11-24 19:48:10.368965902 +0000
++++ lab3.c	2025-11-24 19:52:20.704020931 +0000
+@@ -2,7 +2,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <time.h>
+ 
+ #define MAX_INIT_RETRIES 100
+ #define NUM_RANDOM_PERMUTATIONS 6
+@@ -19,24 +18,29 @@
+ void print_labirinth(char *labirinth, int size);
+ 
+ int main(int argc, char **argv) {
+-    if (argc < 3) {
+-        fprintf(stderr, "Usage: %s chars size\n", argv[0]);
++    if (argc < 4) {
++        fprintf(stderr, "Usage: %s seed chars size\n", argv[0]);
+         return 1;
+     }
++    int seed = atoi(argv[1]);
++    if (seed < 0) {
++        fprintf(stderr, "Please, specify positive seed\n");
++        return 1;
++    }
++    srand(seed);
+ 
+-    if (strlen(argv[1]) < 2) {
++    if (strlen(argv[2]) < 2) {
+         fprintf(stderr, "You should specify at least 2 chars for passages and walls\n");
+         return 1;
+     }
+-    passage_char = argv[1][0];
+-    wall_char = argv[1][1];
++    passage_char = argv[2][0];
++    wall_char = argv[2][1];
+ 
+-    int size = atoi(argv[2]);
++    int size = atoi(argv[3]);
+     if (size < 2) {
+         fprintf(stderr, "Labirinth size should be greater than 1\n");
+         return 1;
+     }
+-    srand(time(NULL));
+ 
+     char *labirinth = get_labirinth(size);
+     if (labirinth == NULL) {
