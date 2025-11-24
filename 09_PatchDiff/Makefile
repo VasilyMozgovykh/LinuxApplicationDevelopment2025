@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -O3
+GENERATES = lab lab1* lab2* lab3*
 
 All: lab lab1 lab2 lab3
 
@@ -19,4 +20,4 @@ lab3.c: lab2.c
 	patch lab3.c < 0003-Define-seed.patch;
 
 clean:
-	rm -rf lab lab1 lab2 lab3 lab1.c lab2.c lab3.c
+	rm -rf $(GENERATES)
