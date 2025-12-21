@@ -84,7 +84,7 @@ struct buf {
     ((v) ? (buf_ptr((v))->size = 0) : 0)
 
 
-static void *
+void *
 buf_grow1(void *v, size_t esize, ptrdiff_t n);
 
 #endif /* BUF_H_DEFINED */

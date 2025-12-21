@@ -1,5 +1,6 @@
-#include <check.h>
+#include "config.h"
 #include "buf.h"
+#include <check.h>
 
 START_TEST(test_init) {
     float *a = 0;
