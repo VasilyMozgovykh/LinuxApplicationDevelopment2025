@@ -1,4 +1,5 @@
 #include "buf.h"
+#include "config.h"
 
 static void *
 buf_grow1(void *v, size_t esize, ptrdiff_t n)
