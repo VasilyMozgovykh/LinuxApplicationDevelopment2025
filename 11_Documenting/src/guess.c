@@ -1,3 +1,13 @@
+/**
+ * @file guess.c
+ * @brief Simple guess a number game for kids.
+ *
+ * Program asks user if their number is greater than guessed value
+ * and finds the number using binary search.
+ *
+ * Supports arabic numbers (1..100) and roman numbers (I..C).
+ */
+
 #include <libgen.h>
 #include <libintl.h>
 #include <locale.h>

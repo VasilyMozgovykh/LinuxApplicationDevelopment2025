@@ -1,7 +1,7 @@
 AC_PREREQ([2.69])
-AC_INIT([guess], [0.0], [vasily.mozgovykh@yandex.ru])
+AC_INIT([Simple guess a number game for kids], [0.0], [vasily.mozgovykh@yandex.ru], [guess])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-
+DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_REQUIRE_VERSION(0.21)
 
@@ -16,5 +16,10 @@ AC_CHECK_HEADERS([libintl.h libgen.h locale.h stdlib.h stdio.h string.h])
 
 AC_CHECK_FUNCS([realpath setlocale])
 
-AC_CONFIG_FILES([Makefile po/Makefile.in src/Makefile])
+AC_CONFIG_FILES([
+    Makefile
+    po/Makefile.in
+    src/Makefile
+    Doxyfile
+])
 AC_OUTPUT
