@@ -2,7 +2,10 @@ SUBDIRS = src po
 
 @DX_RULES@
 
-all-local: doxygen-doc
+docs:	doxygen-doc
+
+http:	doxygen-doc
+	python3 -m http.server --directory $</html
 
 gitclean:
 	git clean -df;

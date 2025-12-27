@@ -1,11 +1,19 @@
-/**
- * @file guess.c
+/** @mainpage guess
+ * 
  * @brief Simple guess a number game for kids.
+ * 
+ * @section cli_help Command line help
  *
  * Program asks user if their number is greater than guessed value
  * and finds the number using binary search.
  *
  * Supports arabic numbers (1..100) and roman numbers (I..C).
+ * 
+ * @b --help
+ * @n Display help
+ * 
+ * @b -r
+ * @n Use roman numbers
  */
 
 #include <libgen.h>
@@ -16,20 +24,36 @@
 #include <string.h>
 #include "config.h"
 
+/** gettext shortcut */
 #define _(STRING) gettext(STRING)
 
-/* Roman numbers support */
+/**
+ * @struct RomanNumeralPair
+ * @brief Mapping pair roman literal -> integer value.
+ */
 typedef struct RomanNumeralPair {
-    const char *roman;
-    int numeral;
+    const char *roman; /**< Roman literal */
+    int numeral; /**< Integer value */
 } RomanNumeralPair;
 
+/**
+ * @brief Roman to arabic mapping table.
+ *
+ * Order from largest to smallest.
+ */
 RomanNumeralPair RomanNumeralMap[] = {
     {"C", 100}, {"XC", 90}, {"L", 50},
     {"XL", 40},{"X", 10}, {"IX", 9},
     {"V", 5}, {"IV", 4}, {"I", 1}
 };
 
+/**
+ * @brief Convert integer to Roman representation.
+ *
+ * @param numeral Number in range 1..100.
+ * @return Pointer to static buffer with roman representation.
+ * @warning The returned pointer refers to a static buffer.
+ */
 char *numeral_to_roman(int numeral) {
     static char roman[10];
     char *roman_ptr = roman;
@@ -49,6 +73,12 @@ char *numeral_to_roman(int numeral) {
     return roman;
 }
 
+/**
+ * @brief Convert roman string to integer.
+ *
+ * @param roman roman string (e.g. "XIV").
+ * @return Parsed integer.
+ */
 int roman_to_numeral(const char *roman) {
     int numeral = 0, max_iterations = 10;
     for (int iter_num = 0; iter_num < max_iterations && *roman != '\0'; iter_num++) {
@@ -62,14 +92,30 @@ int roman_to_numeral(const char *roman) {
     }
     return numeral;
 }
-/* ===================== */
 
 int main(int argc, char **argv) {
     setlocale(LC_ALL, "");
     bindtextdomain(PACKAGE, LOCALE_PATH);
     textdomain(PACKAGE);
 
-    char roman_mode = (argc > 1 && strcmp(argv[1], "-r") == 0);
+    char roman_mode = 0;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-r") == 0) {
+            roman_mode = 1;
+        } else if (strcmp(argv[i], "--help") == 0) {
+            printf(_(
+                "Usage: %s [-r | --help]\n"
+                "Simple guess a number game for kids.\n"
+                "Program asks user if their number is greater than guessed value "
+                "and finds the number using binary search.\n"
+                "\n"
+                "Possible flags:\n"
+                "    -r        Use roman numbers\n"
+                "    --help    Display this help\n"
+            ), argv[0]);
+            return 0;
+        }
+    }
 
     int low = 1, high = 100, guess;
     char input[10];
