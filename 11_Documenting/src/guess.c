@@ -1,19 +1,19 @@
-/** @mainpage guess
+/** \mainpage guess
+ *
+ * \brief Simple guess a number game for kids.
  * 
- * @brief Simple guess a number game for kids.
- * 
- * @section cli_help Command line help
+ * \section cli_help Command line help
  *
  * Program asks user if their number is greater than guessed value
  * and finds the number using binary search.
  *
  * Supports arabic numbers (1..100) and roman numbers (I..C).
  * 
- * @b --help
- * @n Display help
+ * \b --help
+ * \n Display help
  * 
- * @b -r
- * @n Use roman numbers
+ * \b -r
+ * \n Use roman numbers
  */
 
 #include <libgen.h>
@@ -28,8 +28,8 @@
 #define _(STRING) gettext(STRING)
 
 /**
- * @struct RomanNumeralPair
- * @brief Mapping pair roman literal -> integer value.
+ * \struct RomanNumeralPair
+ * \brief Mapping pair roman literal -> integer value.
  */
 typedef struct RomanNumeralPair {
     const char *roman; /**< Roman literal */
@@ -37,7 +37,7 @@ typedef struct RomanNumeralPair {
 } RomanNumeralPair;
 
 /**
- * @brief Roman to arabic mapping table.
+ * \brief Roman to arabic mapping table.
  *
  * Order from largest to smallest.
  */
@@ -48,11 +48,11 @@ RomanNumeralPair RomanNumeralMap[] = {
 };
 
 /**
- * @brief Convert integer to Roman representation.
+ * \brief Convert integer to Roman representation.
  *
- * @param numeral Number in range 1..100.
- * @return Pointer to static buffer with roman representation.
- * @warning The returned pointer refers to a static buffer.
+ * \param numeral Number in range 1..100.
+ * \return Pointer to static buffer with roman representation.
+ * \warning The returned pointer refers to a static buffer.
  */
 char *numeral_to_roman(int numeral) {
     static char roman[10];
@@ -74,10 +74,10 @@ char *numeral_to_roman(int numeral) {
 }
 
 /**
- * @brief Convert roman string to integer.
+ * \brief Convert roman string to integer.
  *
- * @param roman roman string (e.g. "XIV").
- * @return Parsed integer.
+ * \param roman roman string (e.g. "XIV").
+ * \return Parsed integer.
  */
 int roman_to_numeral(const char *roman) {
     int numeral = 0, max_iterations = 10;
