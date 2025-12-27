@@ -1,14 +1,21 @@
 /** \mainpage guess
  *
- * \brief Simple guess a number game for kids.
+ * \file guess.c
  * 
- * \section cli_help Command line help
+ * \section name NAME
+ * guess - simple guess a number game for kids
+ * 
+ * \section synopsis SYNOPSIS
+ * \b guess [\b -r] [\b --help]
+ * 
+ * \section description DESCRIPTION
  *
  * Program asks user if their number is greater than guessed value
  * and finds the number using binary search.
  *
  * Supports arabic numbers (1..100) and roman numbers (I..C).
  * 
+ * \section options OPTIONS
  * \b --help
  * \n Display help
  * 
@@ -93,6 +100,13 @@ int roman_to_numeral(const char *roman) {
     return numeral;
 }
 
+/**
+ * \brief Program's entry point
+ *
+ * \param argc Total number of arguments.
+ * \param argv Provided argument strings.
+ * \return Error code, 0 on success
+ */
 int main(int argc, char **argv) {
     setlocale(LC_ALL, "");
     bindtextdomain(PACKAGE, LOCALE_PATH);

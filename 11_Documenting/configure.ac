@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT([Simple guess a number game for kids], [0.0], [vasily.mozgovykh@yandex.ru], [guess])
+AC_INIT([Simple guess a number game for kids], [0.1], [vasily.mozgovykh@yandex.ru], [guess])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])

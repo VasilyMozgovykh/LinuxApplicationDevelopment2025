@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: guess 0.0\n"
 "Report-Msgid-Bugs-To: vasily.mozgovykh@yandex.ru\n"
-"POT-Creation-Date: 2025-12-27 17:14+0000\n"
+"POT-Creation-Date: 2025-12-27 19:55+0000\n"
 "PO-Revision-Date: 2025-12-27 17:14+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/guess.c:107
+#: src/guess.c:121
 #, c-format
 msgid ""
 "Usage: %s [-r | --help]\n"
@@ -32,49 +32,49 @@ msgid ""
 msgstr ""
 "Использование: %s [-r | --help]\n"
 "Простая угадайка чисел от 1 до 100 для детей.\n"
-"Программа спрашивает, число больше или меньше загаданного, и находит "
-"нужное бинарным поиском.\n"
+"Программа спрашивает, число больше или меньше загаданного, и находит нужное "
+"бинарным поиском.\n"
 "\n"
 "Возможные флаги:\n"
 "    -r        Использовать римские цифры\n"
 "    --help    Показать помощь\n"
 
-#: src/guess.c:124
+#: src/guess.c:138
 #, c-format
 msgid "Guess a number from I to C.\n"
 msgstr "Загадайте число от I до C.\n"
 
-#: src/guess.c:126
+#: src/guess.c:140
 #, c-format
 msgid "Guess a number from 1 to 100.\n"
 msgstr "Загадайте число от 1 до 100.\n"
 
-#: src/guess.c:133
+#: src/guess.c:147
 #, c-format
 msgid "Is your number greater than %s? (Yes/No): "
 msgstr "Ваше число больше, чем %s? (Yes/No): "
 
-#: src/guess.c:135
+#: src/guess.c:149
 #, c-format
 msgid "Is your number greater than %d? (Yes/No): "
 msgstr "Ваше число больше, чем %d? (Yes/No): "
 
-#: src/guess.c:139
+#: src/guess.c:153
 #, c-format
 msgid "Input/Output error. Terminating...\n"
 msgstr "Ошибка ввода/вывода. Завершение программы...\n"
 
-#: src/guess.c:148
+#: src/guess.c:162
 #, c-format
 msgid "Please answer 'Yes' or 'No'\n"
 msgstr "Пожалуйста, отвечайте 'Yes' или 'No'\n"
 
-#: src/guess.c:153
+#: src/guess.c:167
 #, c-format
 msgid "Your guessed number is %s!\n"
 msgstr "Вы загадали число %s!\n"
 
-#: src/guess.c:155
+#: src/guess.c:169
 #, c-format
 msgid "Your guessed number is %d!\n"
 msgstr "Вы загадали число %d!\n"
