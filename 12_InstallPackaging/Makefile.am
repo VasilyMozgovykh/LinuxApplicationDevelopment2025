@@ -16,7 +16,7 @@ install-data-local:
 	mkdir -p $(DESTDIR)/$(docdir);
 	cp -a doxygen-doc/html $(DESTDIR)/$(docdir);
 
-uninstall-data-local:
+uninstall-local:
 	rm -rf $(DESTDIR)/$(docdir)/libroman_converter;
 
 http: doxygen-doc
