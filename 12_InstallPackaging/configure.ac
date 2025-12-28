@@ -5,12 +5,14 @@ DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_REQUIRE_VERSION(0.21)
 
+LT_INIT([disable-static])
 AC_CONFIG_SRCDIR([src/guess.c])
 AC_CONFIG_HEADERS([config.h])
 
 ALL_LINGUAS="ru"
 
 AC_PROG_CC
+AM_PROG_AR
 
 AC_CHECK_HEADERS([libintl.h libgen.h locale.h stdlib.h stdio.h string.h])
 
