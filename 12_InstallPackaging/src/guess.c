@@ -118,15 +118,19 @@ int main(int argc, char **argv) {
             roman_mode = 1;
         } else if (strcmp(argv[i], "--help") == 0) {
             printf(_(
-                "Usage: %s [-r | --help]\n"
+                "Usage: %s [-r | --help | --version]\n"
                 "Simple guess a number game for kids.\n"
                 "Program asks user if their number is greater than guessed value "
                 "and finds the number using binary search.\n"
                 "\n"
                 "Possible flags:\n"
-                "    -r        Use roman numbers\n"
-                "    --help    Display this help\n"
+                "    -r           Use roman numbers\n"
+                "    --help       Display this help\n"
+                "    --version    Display program version\n"
             ), argv[0]);
+            return 0;
+        } else if (strcmp(argv[i], "--version") == 0) {
+            printf(_("0.1"));
             return 0;
         }
     }
