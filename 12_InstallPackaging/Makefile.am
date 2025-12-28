@@ -1,4 +1,4 @@
-SUBDIRS = src po
+SUBDIRS = src po tests
 AM_CFLAGS = -Wall -O0 -g
 
 @DX_RULES@

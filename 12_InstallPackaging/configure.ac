@@ -14,6 +14,10 @@ ALL_LINGUAS="ru"
 AC_PROG_CC
 AM_PROG_AR
 
+PKG_CHECK_MODULES([CHECK],[check])
+AC_SUBST(CHECK_CFLAGS)
+AC_SUBST(CHECK_LIBS)
+
 AC_CHECK_HEADERS([libintl.h libgen.h locale.h stdlib.h stdio.h string.h])
 
 AC_CHECK_FUNCS([realpath setlocale])
@@ -22,6 +26,7 @@ AC_CONFIG_FILES([
     Makefile
     po/Makefile.in
     src/Makefile
+    tests/Makefile
     Doxyfile
 ])
 AC_OUTPUT
