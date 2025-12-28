@@ -30,75 +30,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
+#include "roman_converter.h"
 
 /** gettext shortcut */
 #define _(STRING) gettext(STRING)
-
-/**
- * \struct RomanNumeralPair
- * \brief Mapping pair roman literal -> integer value.
- */
-typedef struct RomanNumeralPair {
-    const char *roman; /**< Roman literal */
-    int numeral; /**< Integer value */
-} RomanNumeralPair;
-
-/**
- * \brief Roman to arabic mapping table.
- *
- * Order from largest to smallest.
- */
-RomanNumeralPair RomanNumeralMap[] = {
-    {"C", 100}, {"XC", 90}, {"L", 50},
-    {"XL", 40},{"X", 10}, {"IX", 9},
-    {"V", 5}, {"IV", 4}, {"I", 1}
-};
-
-/**
- * \brief Convert integer to Roman representation.
- *
- * \param numeral Number in range 1..100.
- * \return Pointer to static buffer with roman representation.
- * \warning The returned pointer refers to a static buffer.
- */
-char *numeral_to_roman(int numeral) {
-    static char roman[10];
-    char *roman_ptr = roman;
-    for (int i = 0; i < 9; i++) {
-        int div = numeral / RomanNumeralMap[i].numeral;
-        for (int k = 0; k < div; k++) {
-            for (int c = 0; c < strlen(RomanNumeralMap[i].roman); c++, roman_ptr++) {
-                *roman_ptr = RomanNumeralMap[i].roman[c];
-            }
-        }
-        numeral %= RomanNumeralMap[i].numeral;
-        if (numeral == 0) {
-            break;
-        }
-    }
-    *roman_ptr = '\0';
-    return roman;
-}
-
-/**
- * \brief Convert roman string to integer.
- *
- * \param roman roman string (e.g. "XIV").
- * \return Parsed integer.
- */
-int roman_to_numeral(const char *roman) {
-    int numeral = 0, max_iterations = 10;
-    for (int iter_num = 0; iter_num < max_iterations && *roman != '\0'; iter_num++) {
-        for (int i = 0; i < 9; i++) {
-            if (strstr(roman, RomanNumeralMap[i].roman) == roman) {
-                numeral += RomanNumeralMap[i].numeral;
-                roman += strlen(RomanNumeralMap[i].roman);
-                break;
-            }
-        }
-    }
-    return numeral;
-}
 
 /**
  * \brief Program's entry point
