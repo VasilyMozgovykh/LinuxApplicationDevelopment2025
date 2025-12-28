@@ -32,7 +32,10 @@ make check;
 ```sh
 make docs;
 ```
-Страница `man` будет доступна в `doxygen-doc/man/man1/guess.1`
+Страница `man` будет доступна в `doxygen-doc/man/man1/guess.1`. При установке от `root` документация будет доступна через
+```sh
+man guess
+```
 
 ## Очистка
 ```sh
