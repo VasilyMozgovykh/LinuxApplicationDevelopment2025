@@ -93,9 +93,9 @@ int main(int argc, char **argv) {
             return 1;
         }
 
-        if (strncmp(input, "Yes", 3) == 0) {
+        if (strncmp(input, _("Yes"), 3) == strlen(_("Yes"))) {
             low = guess + 1;
-        } else if (strncmp(input, "No", 2) == 0) {
+        } else if (strncmp(input, _("No"), 2) == strlen(_("No"))) {
             high = guess;
         } else {
             printf(_("Please answer 'Yes' or 'No'\n"));

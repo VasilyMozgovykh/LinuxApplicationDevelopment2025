@@ -1,16 +1,16 @@
 # Russian translations for guess package.
 # Copyright (C) 2025 Free Software Foundation, Inc.
 # This file is distributed under the same license as the guess package.
-# Automatically generated, 2025.
+#  <vasily.mozgovykh@yandex.ru>, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: guess 0.0\n"
+"Project-Id-Version: guess 0.1\n"
 "Report-Msgid-Bugs-To: vasily.mozgovykh@yandex.ru\n"
-"POT-Creation-Date: 2025-12-28 09:48+0000\n"
-"PO-Revision-Date: 2025-12-27 17:14+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2025-12-28 11:46+0000\n"
+"PO-Revision-Date: 2025-12-28 11:46+0000\n"
+"Last-Translator:  <vasily.mozgovykh@yandex.ru>\n"
+"Language-Team: Russian <gnu@d07.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +19,7 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/guess.c:56
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [-r | --help | --version]\n"
 "Simple guess a number game for kids.\n"
@@ -32,13 +32,13 @@ msgid ""
 "    --version    Display program version\n"
 msgstr ""
 "Использование: %s [-r | --help | --version]\n"
-"Простая угадайка чисел от 1 до 100 для детей.\n"
-"Программа спрашивает, число больше или меньше загаданного, и находит нужное "
-"бинарным поиском.\n"
+"Простая игра-угадайка чисел для детей.\n"
+"Программа спрашивает, загаданное число больше текущего или нет и находит "
+"загаданное число бинарным поиском.\n"
 "\n"
 "Возможные флаги:\n"
 "    -r           Использовать римские цифры\n"
-"    --help       Показать помощь\n"
+"    --help       Показать эту справку\n"
 "    --version    Показать версию программы\n"
 
 #: src/guess.c:68
@@ -59,22 +59,30 @@ msgstr "Загадайте число от 1 до 100.\n"
 #: src/guess.c:86
 #, c-format
 msgid "Is your number greater than %s? (Yes/No): "
-msgstr "Ваше число больше, чем %s? (Yes/No): "
+msgstr "Ваше число больше, чем %s? (Да/Нет): "
 
 #: src/guess.c:88
 #, c-format
 msgid "Is your number greater than %d? (Yes/No): "
-msgstr "Ваше число больше, чем %d? (Yes/No): "
+msgstr "Ваше число больше, чем %d? (Да/Нет): "
 
 #: src/guess.c:92
 #, c-format
 msgid "Input/Output error. Terminating...\n"
 msgstr "Ошибка ввода/вывода. Завершение программы...\n"
 
+#: src/guess.c:96
+msgid "Yes"
+msgstr "Да"
+
+#: src/guess.c:98
+msgid "No"
+msgstr "Нет"
+
 #: src/guess.c:101
 #, c-format
 msgid "Please answer 'Yes' or 'No'\n"
-msgstr "Пожалуйста, отвечайте 'Yes' или 'No'\n"
+msgstr "Пожалуйста, отвечайте 'Да' или 'Нет'\n"
 
 #: src/guess.c:106
 #, c-format
