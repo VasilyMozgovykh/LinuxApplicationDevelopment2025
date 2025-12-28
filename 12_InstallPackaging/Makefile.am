@@ -19,6 +19,6 @@ install-data-local:
 http: doxygen-doc
 	python3 -m http.server --directory $</html
 
-gitclean:
+gitclean: clean
 	git clean -df;
 	rm -rf *.o src/*.o src/guess $(GENERATES)
