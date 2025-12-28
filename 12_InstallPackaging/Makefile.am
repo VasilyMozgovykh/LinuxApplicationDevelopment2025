@@ -8,17 +8,20 @@ all-local: doxygen-doc
 docs: doxygen-doc
 
 doxygen-doc/man/man1/guess.1: doxygen-doc
-	help2man -N ./src/guess > $@
+	help2man -N ./src/guess > $@;
 
 man1_MANS = doxygen-doc/man/man1/guess.1
 
 install-data-local:
-	mkdir -p $(DESTDIR)/$(docdir)
-	cp -a doxygen-doc/html $(DESTDIR)/$(docdir)
+	mkdir -p $(DESTDIR)/$(docdir);
+	cp -a doxygen-doc/html $(DESTDIR)/$(docdir);
+
+uninstall-data-local:
+	rm -rf $(DESTDIR)/$(docdir)/libroman_converter;
 
 http: doxygen-doc
-	python3 -m http.server --directory $</html
+	python3 -m http.server --directory $</html;
 
 gitclean: clean
 	git clean -df;
-	rm -rf *.o src/*.o src/guess $(GENERATES)
+	rm -rf *.o src/*.o src/guess $(GENERATES);
